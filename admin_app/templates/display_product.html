@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends 'admin_page.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="margin:35px 0 0 30px;">
+        <a href="{% url 'add_product' %}"><button type="button" class="btn rounded-pill btn-primary">Add Product</button></a>
+        <span><h1 style="margin-left:500px;">DISPLAY PRODUCTS</h1></span>
+    </div>
+    <div style="margin:30px;" class="card">
+        <div class="table-responsive text-nowrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="font-size: 20px;">Category</th>
+                <th style="font-size: 20px;">Product</th>
+                <th style="font-size: 20px;">Quantity</th>
+                <th style="font-size: 20px;">Price</th>
+                <th style="font-size: 20px;">Description</th>
+                <th style="font-size: 20px;">Image</th>
+                <th style="font-size: 20px; padding-left: 30px;">Manage Products</th>
+              </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+
+{% for i in data %}
+              <tr>
+                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{i.c_name}}</strong></td>
+                <td>{{i.p_name}}</td>
+                <td>{{i.p_qty}}</td>
+                <td>{{i.p_price}}</td>
+                <td>{{i.description}}</td>
+                <td>
+                      <img style="width:70px; height:70px;" src="{{i.p_image.url}}" alt="Avatar" class="rounded-circle">
+                </td>
+                <td>
+                    <a href="{% url 'edit_product' data_id=i.id %}"><button style="margin-left:15px;" type="button" class="btn btn-info">Edit</button></a>
+                    <a href="{% url 'delete_product' data_id=i.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                </td>
+              </tr>
+{% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
